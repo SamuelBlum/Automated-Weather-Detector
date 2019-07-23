@@ -18,6 +18,7 @@ def main(args):
     im_grey = im.convert('LA') # convert to grayscale
     width, height = im.size
 
+    # compute average pixel intensity value
     total = 0
     for i in range(0, width):
        for j in range(0, height):
@@ -42,20 +43,22 @@ def main(args):
          im_enhanced = automated_gamma_correction(im_original,gamma=(1/hazelevel))
 
     # Detect underwater level
+    totalred = 0
     for i in range(0, width):
        for j in range(0, height):
             totalgreen += im_original.getpixel((i,j))[1]
 
     # Underwater images have significant levels of green
-    meangreen = totalgreen / (width * height)
+    meanred = totalred / (width * height)
 
     # Apply red filter automatically for underwater
-    if mean > 1000:
+    # compute average pixel red channel intensity value
+    if mean < 100:
          im_enhanced = automated_color_correction(im_original)
 
     print("Night level is " + str(nightlevel))
     print("Haze level is " + str(hazelevel))
-    print("Underwater level is " + str(meangreen))
+    print("Underwater level is " + str(meanred))
     print(mean)
 
 def automated_gamma_correction(image, gamma=1.0):
