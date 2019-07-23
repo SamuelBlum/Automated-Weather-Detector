@@ -1,2 +1,2 @@
-# ML-Weather-Detector
-Detect weather based on image
+# Automated-Weather-Detector
+Detect weather based on image pixel values. Fog / Haze / Underwater / Daytime / Nighttime / Cloudy / etc...
