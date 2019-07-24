@@ -1,4 +1,4 @@
-# Automated-Weather-Detector (And Image Enhancer)
+# Automated-Weather-Detector
 
 ![Enhancement based on gamma and color correction](underwater.png)
 
@@ -14,4 +14,4 @@ The depth underwater can be computed by measuring the average intensity value of
 
 ## Automated and Localized Gamma / Color Correction
 
-Two routines to adjust / enhance the image to gain a higher quality.
+Two routines to adjust the image to account for the weather scenario
