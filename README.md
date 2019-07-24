@@ -1,8 +1,8 @@
 # Automated-Weather-Detector
 
-![Enhancement based on gamma and color correction](underwater.png)
+![Depth of underwater image determined](underwater.png)
 
-Detect weather (and enhance the image) based on image pixel values. Fog / Haze / Underwater / Daytime / Nighttime / Cloudy / etc...
+Detect weather based on image pixel values. Fog / Haze / Underwater / Daytime / Nighttime / Cloudy / etc...
 
 ## Night Level / Haze Level
 
