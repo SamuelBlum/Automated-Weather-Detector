@@ -34,8 +34,11 @@ def main(args):
     # Automatically adjust gamma
     if nightlevel > 0:
          im_enhanced = automated_gamma_correction(im_original,gamma=(2))
-	 # add text box with label of weather
-         command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "Ambient Light = " + str(mean) + " ft" + ":x=(w-tw)/2:y=(h-th)/2' output.jpg"
+         command = "ffmpeg -i " + image + \
+                         " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:\
+                           text=" + "Ambient Light = " + str(mean) + " " + \
+                          ":x=(w-tw)/2:y=(h-th)/2' \
+                           output.jpg"
          os.system(command)
 
     # Detect Haze
@@ -45,8 +48,11 @@ def main(args):
     # Automatically adjust gamma
     if hazelevel > 0:
          im_enhanced = automated_gamma_correction(im_original,gamma=(1/hazelevel))
-	 # add text box with label of weather
-         command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "Haze Level = " + str(mean) + " ft" + ":x=(w-tw)/2:y=(h-th)/2' output.jpg"
+         command = "ffmpeg -i " + image + \
+                         " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:\
+                           text=" + "Haze Level = " + str(mean) + " " + \
+                          ":x=(w-tw)/2:y=(h-th)/2' \
+                           output.jpg"
          os.system(command)
 
     # Detect underwater level
@@ -62,14 +68,16 @@ def main(args):
     # compute average pixel red channel intensity value
     if mean < 100:
          im_enhanced = automated_color_correction(im_original)
-	 # add text box with label of weather
-         command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "Depth = " + str(mean) + " ft" + ":x=(w-tw)/2:y=(h-th)/2' output.jpg"
+         command = "ffmpeg -i " + image + \
+                         " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:\
+                           text=" + "Underwater Depth = " + str(mean) + " ft" + \
+                          ":x=(w-tw)/2:y=(h-th)/2' \
+                           output.jpg"
          os.system(command)
 
     print("Night level is " + str(nightlevel))
     print("Haze level is " + str(hazelevel))
     print("Underwater level is " + str(meanred))
-    print(mean)
 
 def automated_gamma_correction(image, gamma=1.0):
 
