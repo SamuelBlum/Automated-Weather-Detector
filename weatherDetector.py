@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import argparse
 import cv2
+import os
 import matplotlib.pyplot as plt
 
 def main(args):
@@ -33,6 +34,8 @@ def main(args):
     # Automatically adjust gamma
     if nightlevel > 0:
          im_enhanced = automated_gamma_correction(im_original,gamma=(2))
+	 command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "'Ambient light level = " + mean + "'" + ":x=(w-tw)/2:y=(h-th)/2"  "output.jpg"
+	 os.system(command)
 
     # Detect Haze
     if mean > 100:
@@ -41,12 +44,14 @@ def main(args):
     # Automatically adjust gamma
     if hazelevel > 0:
          im_enhanced = automated_gamma_correction(im_original,gamma=(1/hazelevel))
+	 command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "'Fog level = " + mean + "'" + ":x=(w-tw)/2:y=(h-th)/2"  "output.jpg"
+	 os.system(command)
 
     # Detect underwater level
     totalred = 0
     for i in range(0, width):
        for j in range(0, height):
-            totalgreen += im_original.getpixel((i,j))[1]
+            totalred += im_original.getpixel((i,j))[1]
 
     # Underwater images have significant levels of green
     meanred = totalred / (width * height)
@@ -55,6 +60,8 @@ def main(args):
     # compute average pixel red channel intensity value
     if mean < 100:
          im_enhanced = automated_color_correction(im_original)
+	 command = "ffmpeg -i " + image + " -vf drawtext='fontfile=/Library/Fonts/Verdana.ttf:text=" + "'Depth = " + mean + " ft'" + ":x=(w-tw)/2:y=(h-th)/2"  "output.jpg"
+	 os.system(command)
 
     print("Night level is " + str(nightlevel))
     print("Haze level is " + str(hazelevel))
